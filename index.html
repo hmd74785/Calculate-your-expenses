@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة المصاريف اليومية | My Expenses</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="sidebar">
+        <div class="logo">
+            <i class="fas fa-wallet"></i>
+            <span>My Expenses</span>
+        </div>
+        <nav>
+            <a href="index.html" class="active"><i class="fas fa-home"></i> الرئيسية</a>
+            <a href="#"><i class="fas fa-cog"></i> الإعدادات</a>
+        </nav>
+        <div class="theme-switch">
+            <label class="switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider round"></span>
+            </label>
+            <span class="theme-label">الوضع الليلي</span>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <div class="header-content">
+                <h1>إدارة المصاريف اليومية</h1>
+                <div class="date-filter">
+                    <select id="month-filter">
+                        <option value="all">كل الأشهر</option>
+                        <option value="1">يناير</option>
+                        <option value="2">فبراير</option>
+                        <option value="3">مارس</option>
+                        <!-- ... باقي الأشهر ... -->
+                    </select>
+                    <select id="year-filter">
+                        <option value="2025">2025</option>
+                        <option value="2024">2024</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard">
+            <div class="stats-container">
+                <div class="stat-card total-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>إجمالي المصروفات</h3>
+                        <div class="amount"><span id="total-expenses">0.00</span> ريال</div>
+                    </div>
+                </div>
+                <div class="stat-card today-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>مصروفات اليوم</h3>
+                        <div class="amount"><span id="today-amount">0.00</span> ريال</div>
+                    </div>
+                </div>
+                <div class="stat-card month-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>مصروفات الشهر</h3>
+                        <div class="amount"><span id="month-amount">0.00</span> ريال</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-grid">
+                <div class="expense-form-container">
+                    <div class="card">
+                        <h2><i class="fas fa-plus-circle"></i> إضافة مصروف جديد</h2>
+                        <form id="expense-form">
+                            <div class="form-group">
+                                <label for="amount"><i class="fas fa-money-bill"></i> المبلغ</label>
+                                <input type="number" id="amount" step="0.01" required placeholder="أدخل المبلغ">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="category"><i class="fas fa-tags"></i> الفئة</label>
+                                <select id="category" required>
+                                    <option value="">اختر الفئة</option>
+                                    <option value="طعام">🍽️ طعام ومشروبات</option>
+                                    <option value="مواصلات">🚗 مواصلات</option>
+                                    <option value="تسوق">🛍️ تسوق</option>
+                                    <option value="فواتير">📄 فواتير وخدمات</option>
+                                    <option value="ترفيه">🎮 ترفيه</option>
+                                    <option value="صحة">💊 صحة</option>
+                                    <option value="تعليم">📚 تعليم</option>
+                                    <option value="أخرى">📌 أخرى</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="date"><i class="fas fa-calendar"></i> التاريخ</label>
+                                <input type="date" id="date" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description"><i class="fas fa-align-left"></i> الوصف (اختياري)</label>
+                                <input type="text" id="description" placeholder="أدخل وصفاً">
+                            </div>
+
+                            <button type="submit" class="add-btn">
+                                <i class="fas fa-plus"></i> إضافة المصروف
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="expenses-list-container">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-list"></i> سجل المصاريف</h2>
+                            <div class="card-actions">
+                                <div class="view-options">
+                                    <button id="export-btn" class="action-btn">
+                                        <i class="fas fa-download"></i> تصدير
+                                    </button>
+                                    <button id="delete-all" class="action-btn">
+                                        <i class="fas fa-trash"></i> حذف الكل
+                                    </button>
+                                </div>
+                                <div class="search-box">
+                                    <input type="text" id="search" placeholder="بحث...">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="expenses-container">
+                            <p class="no-expenses" id="no-expenses">لا توجد مصاريف مسجلة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="script.js"></script>
+    <a href="#" class="signature">
+        <i class="fas fa-code"></i>
+        <span class="signature-text">Hamad Atti</span>
+        <span class="copyright"> 2025</span>
+    </a>
+</body>
+</html>
