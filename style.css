@@ -268,6 +268,7 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
 }
 
 .stat-link:hover {
@@ -1088,5 +1089,127 @@ input:checked + .slider:before {
     .signature-content {
         padding: 8px 15px;
         font-size: 0.85em;
+    }
+}
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
+    .main-content {
+        margin-right: 0;
+        padding: 15px;
+    }
+
+    .sidebar {
+        transform: translateX(100%);
+        position: fixed;
+        z-index: 1000;
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .mobile-menu-btn {
+        display: block;
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        z-index: 1001;
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .stats-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 10px 0;
+    }
+
+    .stat-card {
+        margin-bottom: 15px;
+        padding: 20px;
+    }
+
+    .expense-form-container,
+    .expenses-list-container {
+        grid-column: 1 / -1;
+    }
+
+    .header-content {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .date-filter {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .date-filter select {
+        width: 48%;
+    }
+
+    .expense-form {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .expenses-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .expense-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-export-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #search {
+        width: 100%;
+    }
+
+    .export-btn {
+        width: 100%;
+    }
+}
+
+/* Fix for mobile dark mode */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--background-color);
+    }
+}
+
+/* Improve touch targets for mobile */
+@media (max-width: 768px) {
+    button, 
+    select, 
+    input[type="submit"] {
+        min-height: 44px;
+    }
+
+    input, 
+    select {
+        font-size: 16px; /* Prevents zoom on iOS */
     }
 }
